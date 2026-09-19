@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOVIXA | فیلم بعدیت رو پیدا کن</title>
+  <meta name="description" content="MOVIXA - پیدا کردن فیلم و سریال مناسب برای تماشا">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <a class="brand" href="#">
+      <span class="brand-mark">M</span>
+      <span>
+        <strong>MOVIXA</strong>
+        <small>Find your next movie.</small>
+      </span>
+    </a>
+
+    <nav class="nav">
+      <a class="active" href="#home">خانه</a>
+      <a href="#movies">فیلم‌ها</a>
+      <a href="#series">سریال‌ها</a>
+      <a href="#genres">دسته‌بندی‌ها</a>
+      <a href="#popular">محبوب‌ترین‌ها</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="جستجو" onclick="focusSearch()">⌕</button>
+      <button class="icon-btn" aria-label="اعلان">♢</button>
+      <button class="avatar">👤</button>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-content">
+        <span class="badge">★ پیشنهاد ویژه</span>
+        <h1>امشب چی ببینیم؟</h1>
+        <h2>انتخابش با MOVIXA</h2>
+        <p>چند انتخاب ساده انجام بده تا فیلم یا سریالی متناسب با سلیقه‌ات پیدا کنیم.</p>
+        <div class="hero-buttons">
+          <button class="primary-btn" onclick="recommend()">🎲 پیشنهاد بده</button>
+          <a class="ghost-btn" href="#popular">مشاهده محبوب‌ها</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="hero-orb"></div>
+        <div class="hero-card">
+          <span>🎬</span>
+          <b>MOVIXA</b>
+          <small>سینما، دنیای بی‌پایان داستان‌هاست.</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="genres" id="genres">
+      <button class="genre active" data-genre="همه" onclick="filterGenre('همه', this)">✦<span>همه</span></button>
+      <button class="genre" data-genre="اکشن" onclick="filterGenre('اکشن', this)">🔥<span>اکشن</span></button>
+      <button class="genre" data-genre="کمدی" onclick="filterGenre('کمدی', this)">😄<span>کمدی</span></button>
+      <button class="genre" data-genre="ترسناک" onclick="filterGenre('ترسناک', this)">👻<span>ترسناک</span></button>
+      <button class="genre" data-genre="علمی‌تخیلی" onclick="filterGenre('علمی‌تخیلی', this)">🪐<span>علمی‌تخیلی</span></button>
+      <button class="genre" data-genre="عاشقانه" onclick="filterGenre('عاشقانه', this)">❤️<span>عاشقانه</span></button>
+      <button class="genre" data-genre="ماجراجویی" onclick="filterGenre('ماجراجویی', this)">🧭<span>ماجراجویی</span></button>
+      <button class="genre" data-genre="درام" onclick="filterGenre('درام', this)">🎭<span>درام</span></button>
+    </section>
+
+    <section class="layout">
+      <div class="main-column">
+        <section class="section" id="movies">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">برای تو</span>
+              <h2>پیشنهادهای ویژه</h2>
+            </div>
+            <button class="small-btn" onclick="recommend()">🎲 پیشنهاد تصادفی</button>
+          </div>
+          <div class="movie-grid" id="movieGrid"></div>
+        </section>
+
+        <section class="section" id="popular">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">🔥 محبوب‌ها</span>
+              <h2>محبوب‌ترین فیلم‌ها</h2>
+            </div>
+            <div class="tabs">
+              <button class="tab active">امروز</button>
+              <button class="tab">این هفته</button>
+              <button class="tab">این ماه</button>
+            </div>
+          </div>
+          <div class="rank-grid" id="rankGrid"></div>
+        </section>
+      </div>
+
+      <aside class="sidebar">
+        <div class="side-card recommend-card">
+          <div class="side-icon">🎬</div>
+          <h3>چی ببینم؟</h3>
+          <p>بر اساس حال‌وهوات یک فیلم یا سریال انتخاب کنیم.</p>
+          <button class="primary-btn full" onclick="recommend()">شروع کن ←</button>
+        </div>
+
+        <div class="side-card">
+          <div class="side-title">🔎 جست‌وجوی سریع</div>
+          <div class="search-box">
+            <input id="searchInput" type="search" placeholder="نام فیلم، سریال یا بازیگر..." oninput="searchMovies()">
+            <span>⌕</span>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <div class="side-title">💡 امروز چی ببینیم؟</div>
+          <button class="quick" onclick="filterGenre('ترسناک')">👻 یک فیلم ترسناک</button>
+          <button class="quick" onclick="filterGenre('کمدی')">😂 یک کمدی برای حال خوب</button>
+          <button class="quick" onclick="filterGenre('علمی‌تخیلی')">🚀 یک دنیای متفاوت</button>
+          <button class="quick" onclick="filterGenre('اکشن')">🔥 یک فیلم پرهیجان</button>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="brand">
+      <span class="brand-mark">M</span>
+      <span><strong>MOVIXA</strong><small>Find your next movie.</small></span>
+    </div>
+    <p>سینما، دنیای بی‌پایان داستان‌هاست...</p>
+    <div class="socials"><span>✈</span><span>◎</span><span>𝕏</span><span>▶</span></div>
+  </footer>
+
+  <div class="modal" id="recommendModal">
+    <div class="modal-box">
+      <button class="close" onclick="closeModal()">×</button>
+      <span class="badge">🎲 پیشنهاد MOVIXA</span>
+      <div id="recommendResult"></div>
+      <button class="primary-btn full" onclick="recommend()">یکی دیگه پیشنهاد بده</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
